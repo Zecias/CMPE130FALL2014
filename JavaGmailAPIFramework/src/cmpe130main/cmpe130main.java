@@ -28,7 +28,7 @@ public class cmpe130main {
   // Email address of the user, or "me" can be used to represent the currently authorized user.
   private static final String USER = "me";
   // Path to the client_secret.json file downloaded from the Developer Console
-  private static final String CLIENT_SECRET_PATH = "OAuth/client_secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com.json";
+  private static final String CLIENT_SECRET_PATH = "OAuth/client_secret_323256865854-2avcvvv8t8dtp8o2kq4ruf9te2lmb0vp.apps.googleusercontent.com.json";
 
   private static GoogleClientSecrets clientSecrets;
 
