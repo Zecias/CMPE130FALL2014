@@ -1,6 +1,6 @@
 /**
  * File Contents:
- * A container class for a vector of keyword strings and their hashes
+ * A container class for a vector of keyword strings and their rank and hashes
  *
  *  Created on: Oct 9, 2014
  *      Author: Brandon Zhen
@@ -9,21 +9,17 @@
 #ifndef KEYS_HPP_
 #define KEYS_HPP_
 
-#include <iostream>
 #include <vector>
 
 /**
- * @file	Input file formatting and details
+ * @param	keyword	A vector of the keyword strings
+ * @param	rank	A vector of the worth of each keyword
+ * @param	hashe	A vector of the hashes of each keyword
  */
-class keys {
-	std::vector<std::string> keywords;
-	std::vector<signed char> hashes;
-public:
-	keys();								//Default Constructor
-	keys(std::ifstream& filename);		//Autopilot Constructor
-
-	bool load(std::ifstream& filename);
-	void rehash();	//etc etc..
+struct keys {
+	std::vector<std::string> keyword;
+	std::vector<signed char> rank;
+	std::vector<signed char> hash;
 };
 
 #endif /* KEYS_HPP_ */
