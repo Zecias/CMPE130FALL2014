@@ -9,12 +9,13 @@
 #ifndef KEYS_HPP_
 #define KEYS_HPP_
 
+#include <string>
 #include <vector>
 
 /**
  * @param	keyword	A vector of the keyword strings
  * @param	rank	A vector of the worth of each keyword
- * @param	hashe	A vector of the hashes of each keyword
+ * @param	hash	A vector of the hashes of each keyword
  */
 struct keys {
 	std::vector<std::string> keyword;
