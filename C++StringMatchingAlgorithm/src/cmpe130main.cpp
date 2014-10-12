@@ -59,6 +59,9 @@ TODO:	Proposals
 #include "karp.hpp"
 using namespace std;
 
-int main(int argc, char* argv[]) {
-	cout << "poke o3o" << endl;
-}
+int main(int argc, char* argv[]) {/*
+	DECLARE_AND_LOAD_KEYS
+	for_all_texts
+		rankString(text)
+	return RESULTS
+*/}
