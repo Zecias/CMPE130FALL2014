@@ -9,8 +9,6 @@
 #ifndef HASH_HPP_
 #define HASH_HPP_
 
-#include <string>
-
 typedef unsigned long		p_hash_t;
 typedef unsigned long long	lp_hash_t;
 
@@ -44,6 +42,8 @@ void lp_hash(lp_hash_t& hash, char append, char len = 12) {
 	hash = ((hash << 5) | (append & 0b11111)) & (0xFFFFFFFFFFFFFFF >> (6-len)*5);
 }
 
+//#include <string>
+//
 ///**
 // * @param	text	The string to hash completely
 // * @return	An 8 bit wide hash between 0 - 127
