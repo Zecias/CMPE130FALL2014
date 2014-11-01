@@ -10,17 +10,34 @@
 #define KEYS_HPP_
 
 #include <string>
-#include <vector>
+#include "hash.hpp"
+
+typedef signed long rank_t;
 
 /**
- * @param	keyword	A vector of the keyword strings
- * @param	rank	A vector of the worth of each keyword
- * @param	hash	A vector of the hashes of each keyword
+ * @param	keyword	An array of pointers to 'sets' of keyword strings
+ * @param	rank	An array of pointers to 'sets' of keyword worth
+ * @param	hash	An array of pointers to 'sets' of keyword hashes
+ * @param	hlen	The character <length> the <hash>es contain
  */
 struct keys {
-	std::vector<std::string> keyword;
-	std::vector<signed char> rank;
-	std::vector<signed char> hash;
+	std::string *keyword[32];
+	rank_t *rank[32];
+	hash_t *hash[32];
+	signed hlen = hash_t_max;
+};
+
+/**
+ * @param	keyword	An array of pointers to 'sets' of keyword strings
+ * @param	rank	An array of pointers to 'sets' of keyword worth
+ * @param	hash	An array of pointers to 'sets' of keyword long hashes
+ * @param	hlen	The character <length> the <hash>es contain
+ */
+struct lkeys {
+	std::string *keyword[32];
+	rank_t *rank[32];
+	lhash_t *hash[32];
+	signed hlen = lhash_t_max;
 };
 
 #endif /* KEYS_HPP_ */

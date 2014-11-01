@@ -10,6 +10,7 @@
 #define KARP_HPP_
 
 #include "keys.hpp"
+#include "hash.hpp"
 
 /**
  * @param	input_string	The string you want to search through
