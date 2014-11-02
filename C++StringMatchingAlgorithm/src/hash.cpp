@@ -18,8 +18,9 @@
  * @param	len		The max character <length> the <hash> contains [max == 6]
  * @return	A 30 bit wide hash containing the hash of <length> characters
  */
-void hash(hash_t& hash, char append, char len) {
-	hash = ((hash << 5) | (append & 0b11111)) & (07777777777 >> (6-len)*5);
+void hash(hash_t& hash, char append, signed len) {
+	hash = ((hash << 5) | (append & 0b11111))
+		& (hash_t_mask_max >> (hash_t_len_max - len) * 5);
 }
 
 /**
@@ -33,6 +34,7 @@ void hash(hash_t& hash, char append, char len) {
  * @param	len		The max character <length> the <hash> contains [max == 12]
  * @return	A 60 bit wide hash containing the hash of <length> characters
  */
-void lhash(lhash_t& hash, char append, char len) {
-	hash = ((hash << 5) | (append & 0b11111)) & (0xFFFFFFFFFFFFFFF >> (6-len)*5);
+void lhash(lhash_t& hash, char append, signed len) {
+	hash = ((hash << 5) | (append & 0b11111))
+		& (lhash_t_mask_max >> (lhash_t_len_max - len) * 5);
 }

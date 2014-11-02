@@ -12,8 +12,11 @@
 typedef unsigned long		hash_t;
 typedef unsigned long long	lhash_t;
 
-#define hash_t_max	6
-#define lhash_t_max	12
+#define hash_t_len_max		6
+#define lhash_t_len_max		12
+
+#define hash_t_mask_max		07777777777
+#define lhash_t_mask_max	0xFFFFFFFFFFFFFFF
 
 /**
  * This function creates a perfect alphabet hash such that:
@@ -26,7 +29,7 @@ typedef unsigned long long	lhash_t;
  * @param	len		The max character <length> the <hash> contains [max == 6]
  * @return	A 30 bit wide hash containing the hash of <length> characters
  */
-void hash(hash_t& hash, char append, char len = hash_t_max);
+void hash(hash_t& hash, char append, signed len = hash_t_len_max);
 
 /**
  * This function creates a perfect alphabet hash such that:
@@ -39,6 +42,6 @@ void hash(hash_t& hash, char append, char len = hash_t_max);
  * @param	len		The max character <length> the <hash> contains [max == 12]
  * @return	A 60 bit wide hash containing the hash of <length> characters
  */
-void lhash(lhash_t& hash, char append, char len = lhash_t_max);
+void lhash(lhash_t& hash, char append, signed len = lhash_t_len_max);
 
 #endif /* HASH_HPP_ */

@@ -15,8 +15,8 @@
 /**
  * @param	input_string	The string you want to search through
  * @param	search_keys		The container of keyword you want to search for
- * @return	A score from 0 - 100 determining how much was matched
+ * @return	A score from ~[-100] to ~[+100] based on the <Keys> database
  */
-unsigned rankString(std::string input_string, keys search_keys);
+rank_t rankString(std::string input_string, keys search_keys);
 
 #endif /* KARP_HPP_ */
