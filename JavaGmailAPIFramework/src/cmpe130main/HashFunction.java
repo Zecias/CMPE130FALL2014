@@ -30,6 +30,7 @@ public class HashFunction{
 //	}
 	
 	
+	/* This is the test Function */
 	public static void main(String[] args){
 		
 		hash_t hashed = new hash_t();
