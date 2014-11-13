@@ -49,11 +49,19 @@ TODO:	Weekly schedule of what you will accomplish
 \* 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 		*/
 
 #include "karp.hpp"
+#include <iostream>
 using namespace std;
 
-int main(int argc, char* argv[]) {/*
+int main(int argc, char* argv[]) {
+/*
 	DECLARE_AND_LOAD_KEYS
 	for_all_texts
 		rankString(text)
 	return RESULTS
-*/}
+*/
+	keys database;		//This is a test function only
+	load(database, "keys.dat");
+	for (auto n : database.keyword)
+		for (auto i : n)
+			cout << i << endl;
+}

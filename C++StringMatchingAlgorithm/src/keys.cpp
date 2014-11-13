@@ -29,8 +29,8 @@ bool load(keys& keyset, char const* filename) {
 		std::string str;
 		getline(in, str);
 		unsigned delimination_index = str.find('|');
-		unsigned hash_index = str[delimination_index + 1];
-		unsigned word_length = str.length() - delimination_index - 2;
+		unsigned hash_index = str[delimination_index + 1] & 0b11111;
+		unsigned word_length = str.length() - delimination_index - 1;
 		keyset.keyword[hash_index].push_back(str.substr(
 				delimination_index + 1, word_length));
 		keyset.rank[hash_index].push_back(std::atoi(
