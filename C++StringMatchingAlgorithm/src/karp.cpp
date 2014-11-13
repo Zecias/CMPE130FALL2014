@@ -7,7 +7,6 @@
  */
 
 #include "karp.hpp"
-
 /**
  * @param	input_string	The string you want to search through
  * @param	search_keys		The container of pre-sorted keywords to search for
@@ -22,7 +21,9 @@ rank_t rankString(std::string input_string, keys search_keys) {
 	}
 	for (; i < input_string.length(); i++) {
 		hash(strhash, input_string[i], search_keys.maxlen);
-		rank += rankThis(input_string, i, strhash, search_keys);
+
+		rank += rankThis(input_string, i - search_keys.maxlen + 1,
+				strhash, search_keys);
 	}
 	return rank;
 }

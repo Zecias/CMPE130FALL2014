@@ -76,11 +76,22 @@ bool load(keys& keyset, char const* filename) {
  */
 signed rankThis(std::string& str, unsigned begin, hash_t input, keys& keyset) {
 	unsigned const hash_index = input >> (keyset.maxlen - 1) * 5;
-	unsigned high = keyset.hash[hash_index].size();
+
+	/* Size Check */
+	if (keyset.hash[hash_index].size() == 0)
+		return 0;
+
+	unsigned high = keyset.hash[hash_index].size() - 1;
 	unsigned low = 0;
 	signed rank = 0;
+	unsigned vec_i;
 
-	for (unsigned vec_i = high >> 1; high - low > 1; vec_i = (high + low) >> 1) {
+	/* Boundary check because for loop does not check boundaries */
+	if (keyset.hash[hash_index][vec_i = low] == input
+			|| keyset.hash[hash_index][vec_i = high] == input)
+		goto matched;
+
+	for (vec_i = high >> 1; high - low > 1; vec_i = (high + low) >> 1) {
 		if      (keyset.hash[hash_index][vec_i] > input)
 			high = vec_i;
 		else if (keyset.hash[hash_index][vec_i] < input)
@@ -88,6 +99,7 @@ signed rankThis(std::string& str, unsigned begin, hash_t input, keys& keyset) {
 		else /* (keyset.hash[hash_index][vec_i] == input) */ {
 			/* Hash matched */
 
+			matched:
 			unsigned comparelen =	//length to compare
 				keyset.keyword[hash_index][vec_i].length()
 				- keyset.maxlen;
