@@ -52,6 +52,9 @@ TODO:	Weekly schedule of what you will accomplish
 
 #include "karp.hpp"
 #include <iostream>
+#include <string>
+#include <algorithm>
+#include <fstream>
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -66,5 +69,24 @@ int main(int argc, char* argv[]) {
 
 	string str = kevinsshiz;	//This is only a test function
 	rank_t x = rankString(str, database);
-	cout << x;					//Function works only on lower-cases
+	cout << x << endl;					//Function works only on lower-cases
+
+
+	unsigned rank = 0;
+	int y = 0; //debugging
+	ifstream ifs;
+	ifs.open("spam.txt");
+	if(ifs.fail()){
+		cout << "Failed to open spam.txt" << endl;
+	}
+	while(!ifs.eof()){
+		y++;
+		string line;
+		getline(ifs, line, '\n');
+		transform(line.begin(), line.end(), line.begin(), ::tolower);
+//		cout << "line "<< y << ": "<< rankString(line, database) << endl;  // Also for debugging
+		rank += rankString(line, database);
+	}
+	cout << "From file: " << rank << endl;
+
 }
