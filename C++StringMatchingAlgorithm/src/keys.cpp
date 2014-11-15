@@ -83,14 +83,15 @@ signed rankThis(std::string& str, unsigned begin, hash_t input, keys& keyset) {
 
 	unsigned high = keyset.hash[hash_index].size() - 1;
 	unsigned low = 0;
-	signed rank = 0;
 	unsigned vec_i;
 
 	/* Boundary check because for loop does not check boundaries */
-	if (keyset.hash[hash_index][vec_i = low] == input
-			|| keyset.hash[hash_index][vec_i = high] == input)
-		goto matched;
+	if (keyset.hash[hash_index][vec_i = low] == input)
+		goto matchedL;
+	if (keyset.hash[hash_index][vec_i = high] == input)
+		goto matchedH;
 
+	/* Content binary search for first hash match */
 	for (vec_i = high >> 1; high - low > 1; vec_i = (high + low) >> 1) {
 		if      (keyset.hash[hash_index][vec_i] > input)
 			high = vec_i;
@@ -99,41 +100,30 @@ signed rankThis(std::string& str, unsigned begin, hash_t input, keys& keyset) {
 		else /* (keyset.hash[hash_index][vec_i] == input) */ {
 			/* Hash matched */
 
-			matched:
-			unsigned comparelen =	//length to compare
-				keyset.keyword[hash_index][vec_i].length()
-				- keyset.maxlen;
-			signed sig =			//(keyword_string).compare(input_string)
-				keyset.keyword[hash_index][vec_i].substr(
-				keyset.maxlen, comparelen).compare(str.substr(
-				begin + keyset.maxlen, comparelen));
+			matchedL:
+			/* Find last matchable hash */
+			while (keyset.hash[hash_index][++vec_i] == input);
+			vec_i--;
 
-			if (sig < 0)			//1.compare(2) < 0
-				high = vec_i;
-			else if (sig > 0)		//2.compare(1) > 1
-				low = vec_i;
-			else /* (sig == 0) */ {	//3.compare(3) == 0
-				/* Keyword completely matches */
-				rank = keyset.rank[hash_index][vec_i];			//Rank Updated
-
-				/* Check for longer keywords */
-				while (++vec_i < high
-						&& keyset.hash[hash_index][vec_i] == input) {
-					unsigned comparelen =	//length to compare
+			matchedH:
+			while (keyset.hash[hash_index][vec_i] == input) {
+				if (keyset.keyword[hash_index][vec_i].compare(
+						keyset.maxlen,
 						keyset.keyword[hash_index][vec_i].length()
-						- keyset.maxlen;
-					if ( /* (keyword_string).compare(input_string) == 0 */
-							keyset.keyword[hash_index][vec_i].substr(
-							keyset.maxlen, comparelen).compare(str.substr(
-							begin + keyset.maxlen, comparelen)) == 0)
-						rank = keyset.rank[hash_index][vec_i];	//Rank Updated
-					else /* match failure */
-						return rank;		//return pre(++vec_i)_rank;
-				}
-				/* ++vec_i previously already failed */
-				return rank;				//return pre(++vec_i)_rank;
+							- keyset.maxlen,
+					str,
+						begin + keyset.maxlen,
+						keyset.keyword[hash_index][vec_i].length()
+							- keyset.maxlen)
+					== 0)
+						return keyset.rank[hash_index][vec_i];
+				if (vec_i == 0)
+					return 0;		//return on hash match but no keyword match
+				else /* vec_i_last > 0 */
+					vec_i--;
 			}
+			return 0;				//return on hash match but no keyword match
 		}
 	}
-	return 0;								//return no_matches_found;
+	return 0;						//return when no hash match;
 }

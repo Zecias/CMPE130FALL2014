@@ -6,7 +6,7 @@
 * Description : SPAM Filter, Automated Detection and Deletion				*
 \*<3**return*void*~*-pthread<3*~*return*void*~*>linux_gcc*~*return*void**<3*/
 
-#define kevinsshiz "bullshitdrugdosedopetextgoeshere"
+#define testString "she wanted sex at night but she had no sexual experience"
 
 /*																			*\
 TODO:	Proposed Project and Ideas
@@ -36,10 +36,10 @@ TODO:	Weekly schedule of what you will accomplish
 		x	Week 4	(T:11-4) : Implementing C++ String Matching Algorithm into the Gmail Java API
 					(R:11-6) :
 
-		>	Week 5	(T:11-11): Testing, Debugging, and Improving and Finalizing Code
-		>			(R:11-13):
+		x	Week 5	(T:11-11): Testing, Debugging, and Improving and Finalizing Code
+					(R:11-13):
 
-		!	Week 6	(T:11-18): Project Report Due
+		>	Week 6	(T:11-18): Project Report Due
 					(R:11-20):
 
 			Week 7	(T:11-25): Creating PowerPoint
@@ -67,9 +67,9 @@ int main(int argc, char* argv[]) {
 	keys database;				//This is only a test function
 	load(database, "keys.dat");
 
-	string str = kevinsshiz;	//This is only a test function
+	string str = testString;	//This is only a test function
 	rank_t x = rankString(str, database);
-	cout << x << endl;					//Function works only on lower-cases
+	cout << x << endl;			//Function works only on lower-cases
 
 
 	unsigned rank = 0;
